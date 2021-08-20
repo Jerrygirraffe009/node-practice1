@@ -4,9 +4,10 @@ const app = express()
 require('dotenv').config()
 
 const port = process.env.PORT || 3000
+const host = process.env.HOST
 
 
-app.listen (port, () => {
+app.listen (port, host, () => {
     console.log (`Listenting on port ${port}...`)
 })
 
