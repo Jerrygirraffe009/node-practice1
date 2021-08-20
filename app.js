@@ -12,6 +12,6 @@ app.listen (port, host, () => {
 })
 
 app.get ("/", (req,res) => {
-    res.send("Hello")
+    res.send("Hello2")
 })
 
