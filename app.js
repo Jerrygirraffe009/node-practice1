@@ -24,7 +24,12 @@ app.get ("/", (req,res) => {
     res.send("Hello2")
 })
 
-
+app.get("/course/:id", (req, res)=>{
+    course = courses.find ( (c) => c.id === parseInt(req.params.id))
+    if (!course) res.status(404).send("Course not found")
+    
+    res.send (course)
+})
 
 app.get ("/courses", (req,res) => {
     res.send(courses)
