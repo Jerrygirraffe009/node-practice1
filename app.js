@@ -26,6 +26,9 @@ app.get ("/", (req,res) => {
 
 app.get("/course/:id", (req, res)=>{
     course = courses.find ( (c) => c.id === parseInt(req.params.id))
+
+    //course = courses.find ( (c) => c.name === req.params.name)
+
     if (!course) res.status(404).send("Course not found")
     
     res.send (course)
