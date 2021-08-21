@@ -1,23 +1,24 @@
 const express = require("express")
 const app = express()
 
-app.use(express.json())
+app.use(express.json())    // use req.body.<params>
+require('dotenv').config() //Read from .env file
 
-
+// ----- Initialize App (begin)
 const courses = [
     { id: 1, name: "Math"},
     { id: 2, name: "History"},
     { id: 3, name: "Economics"}
 ]
 
-require('dotenv').config()
+const port = process.env.PORT
+// ----- Initialize App (end)
 
-const port = process.env.PORT || 3000
-const host = process.env.HOST
+/* ---------------------------- */
 
-
-app.listen (port, host, () => {
-    console.log (`Listenting on port ${port}...`)
+// ----- Actual API code (begin)
+app.listen (port, () => {
+    console.log (`Listening on port ${port}...`)
 })
 
 app.get ("/", (req,res) => {
@@ -37,16 +38,12 @@ app.get("/course/:id", (req, res)=>{
     res.send (course)
 })
 
-
-
 app.post ("/addcourse", (req,res) => {
     courses.push (
         { id: courses.length +1, name: req.body.name }
 )
-
     res.send(courses)
 })
-
 
 app.put("/updatecourse", (req, res)=>{
     course = courses.find ( (c) => c.id === parseInt(req.body.id))
@@ -58,3 +55,4 @@ app.put("/updatecourse", (req, res)=>{
 
     res.send(course)
 })
+// ----- Actual API code (end)
