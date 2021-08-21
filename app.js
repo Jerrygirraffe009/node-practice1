@@ -2,9 +2,9 @@ const express = require("express")
 const app = express()
 
 const courses = [
-    {id: 1, name: "Math"},
-    {id: 1, name: "History"},
-    {id: 1, name: "Economics"}
+    { id: 1, name: "Math"},
+    { id: 1, name: "History"},
+    { id: 1, name: "Economics"}
 ]
 
 require('dotenv').config()
@@ -23,4 +23,6 @@ app.get ("/", (req,res) => {
 
 app.get ("/courses", (req,res) => {
     res.send(courses)
+
 })
+
