@@ -21,12 +21,15 @@ app.listen (port, host, () => {
 })
 
 app.get ("/", (req,res) => {
-    res.send("Hello2")
+    res.send("Welcome to the API")
+})
+
+app.get ("/courses", (req,res) => {
+    res.send(courses)
 })
 
 app.get("/course/:id", (req, res)=>{
     course = courses.find ( (c) => c.id === parseInt(req.params.id))
-
     //course = courses.find ( (c) => c.name === req.params.name)
 
     if (!course) res.status(404).send("Course not found")
@@ -34,15 +37,12 @@ app.get("/course/:id", (req, res)=>{
     res.send (course)
 })
 
-app.get ("/courses", (req,res) => {
-    res.send(courses)
 
-})
 
 app.post ("/addcourse", (req,res) => {
-    courses.push(
+    courses.push (
         { id: courses.length +1, name: req.body.name }
-        )
+)
 
     res.send(courses)
 })
@@ -50,7 +50,6 @@ app.post ("/addcourse", (req,res) => {
 
 app.put("/updatecourse", (req, res)=>{
     course = courses.find ( (c) => c.id === parseInt(req.body.id))
-
     //course = courses.find ( (c) => c.name === req.params.name)
 
     if (!course) res.status(404).send("Course not found")
