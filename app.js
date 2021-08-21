@@ -3,8 +3,8 @@ const app = express()
 
 const courses = [
     { id: 1, name: "Math"},
-    { id: 1, name: "History"},
-    { id: 1, name: "Economics"}
+    { id: 2, name: "History"},
+    { id: 3, name: "Economics"}
 ]
 
 require('dotenv').config()
