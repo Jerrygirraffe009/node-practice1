@@ -47,3 +47,15 @@ app.post ("/addcourse", (req,res) => {
     res.send(courses)
 })
 
+
+app.put("/updatecourse", (req, res)=>{
+    course = courses.find ( (c) => c.id === parseInt(req.body.id))
+
+    //course = courses.find ( (c) => c.name === req.params.name)
+
+    if (!course) res.status(404).send("Course not found")
+    
+    course.name = req.body.name
+
+    res.send(course)
+})
