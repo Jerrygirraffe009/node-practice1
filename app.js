@@ -1,6 +1,8 @@
 const express = require("express")
 const app = express()
 
+//app.set('view-engine', 'ejs')
+
 app.use(express.json())    // use req.body.<params>
 require('dotenv').config() //Read from .env file
 
@@ -24,6 +26,7 @@ app.listen (port, () => {
 app.get ("/", (req,res) => {
     res.send("Welcome to the API")
 })
+
 
 app.get ("/courses", (req,res) => {
     res.send(courses)
@@ -56,3 +59,38 @@ app.put("/updatecourse", (req, res)=>{
     res.send(course)
 })
 // ----- Actual API code (end)
+
+
+const users =[]
+
+app.use(express.urlencoded({extended: false}))
+//this is to allow form submission to allow to access req.body.<param>
+
+const bcrypt = require ('bcrypt')
+//npm i bcrypt
+//npm i ejs
+
+app.get ("/welcome", (req,res) => {
+    res.render("index.ejs", { name: "Joe" })
+})
+
+app.get ("/login", (req,res) => {
+    res.render("login.ejs")
+})
+
+app.get ("/register", (req,res) => {
+    res.render("register.ejs", { name: "Joe" })
+})
+
+app.post ("/register", async (req,res) => {
+
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+
+    users.push ({
+        name: req.body.name,
+        email: req.body.email,
+        password: hashedPassword
+    })
+    console.log(users)
+    res.redirect("/login")
+})
